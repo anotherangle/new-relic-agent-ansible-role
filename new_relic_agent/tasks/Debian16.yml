@@ -1,0 +1,22 @@
+---
+- name: Add an Apt signing key for newrelic repositery
+  apt_key:
+    url: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
+    state: present
+- name: Adding repo
+  apt_repository:
+    repo: deb [arch=amd64] https://download.newrelic.com/infrastructure_agent/linux/apt xenial main
+    state: present
+- name: Update apt
+  become: true
+  apt:
+    update_cache: yes
+- name: setup agent config
+  template:
+    src: newrelic-infra.yml.j2
+    dest: /etc/newrelic-infra.yml
+    mode: 0600
+- name: install newrelic-agent
+  apt:
+    name: newrelic-infra
+    state: present

@@ -1,0 +1,4 @@
+---
+- hosts: localhost
+  roles:
+    - new_relic_agent 

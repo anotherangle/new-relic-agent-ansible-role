@@ -1,0 +1,9 @@
+---
+
+- name: Fetch OS 
+  include: Debian14.yml
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "trusty"
+
+- name: Fetch OS
+  include: Debian16.yml
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "xenial" 
